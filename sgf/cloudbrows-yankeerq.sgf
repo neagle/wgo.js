@@ -1,25 +1,3 @@
-<!DOCTYPE HTML>
-<html>
-<head>
-	<title>WGo</title>
-	<script type="text/javascript" src="wgo/wgo.js"></script>
-	<script src="wgo/kifu.js"></script>
-	<script src="wgo/sgfparser.js"></script>
-	<script src="wgo/player.js"></script>
-	<script src="wgo/basicplayer.js"></script>
-	<script src="wgo/basicplayer.component.js"></script>
-	<script src="wgo/basicplayer.infobox.js"></script>
-	<script src="wgo/basicplayer.commentbox.js"></script>
-	<script src="wgo/basicplayer.control.js"></script>
-	<script src="wgo/player.editable.js"></script>
-	<script src="wgo/scoremode.js"></script>
-	<script src="wgo/player.permalink.js"></script>
-	<link rel="stylesheet" type="text/css" href="themes/gokibitz/wgo.player.gokibitz.css" />
-</head>
-<body>
-<h1 style="font-family: Consolas">WGo.js Player demo</h1>
-
-<div id="demo">
 (;GM[1]FF[4]CA[UTF-8]AP[CGoban:3]ST[2]
 RU[Japanese]SZ[19]KM[0.50]TM[1500]OT[5x30 byo-yomi]
 PW[cloudbrows]PB[yankeerq]WR[2k]BR[3k]DT[2014-06-14]PC[The KGS Go Server at http://www.gokgs.com/]C[cloudbrows [2k\]: hi - have a good game
@@ -264,36 +242,3 @@ yankeerq [3k\]: hi
 ;B[]BL[703.399]TW[ca][da][ea][fa][ga][ha][ia][ja][ra][sa][db][eb][fb][gb][hb][ib][qb][sb][ec][gc][hc][qc][rc][sc][fd][qd][rd][sd][qe][re][se][rf][sf][pg][rg][sg][bh][ph][qh][rh][sh][ai][ci][pi][qi][ri][si][aj][bj][cj][qj][rj][sj][pk][qk][rk][sk][pl][ql][rl][sl][im][pm][qm][rm][sm][dq][ds]TB[na][mb][nb][mc][ad][kd][ld][be][ce][je][ke][df][jf][lf][mf][ig][fl][em][an][dn][en][ao][bo][co][jo][ap][ip][kp][qp][aq][kq][lq][mq][oq][qq][rq][sq][hr][ir][jr][kr][lr][mr][nr][pr][qr][rr][sr][hs][is][js][ks][ls][ms][ns][os][ps][qs][rs][ss]C[cloudbrows [2k\]: thanks for the game
 yankeerq [3k\]: thx
 ])
-</div>
-
-<script>
-document.body.style.backgroundColor = 'hsl(' + Math.floor(Math.random() * 360) + ', 50%, 50%)';
-var demo = document.getElementById('demo');
-
-var player = new WGo.BasicPlayer(demo, {
-	sgf: demo.innerHTML,
-	enableWheel: false,
-	layout: [
-		{
-			conditions: { minWidth: 650 },
-			className: 'wgo-twocols wgo-large',
-			layout: {
-				right: ['InfoBox', 'CommentBox'],
-				bottom: ['Control']
-			}
-		},
-		// Default
-		{
-			className: 'wgo-onecol wgo-xsmall',
-			layout: {
-				top: ['InfoBox'],
-				bottom: ['Control', 'CommentBox']
-			}
-		}
-	]
-});
-player.setCoordinates(true);
-</script>
-
-</body>
-</html>

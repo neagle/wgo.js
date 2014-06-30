@@ -19,12 +19,12 @@ var prepare_dom_box = function(type) {
 	t.name.className = "wgo-box-title";
 	t.name.innerHTML = type;
 	t.box.appendChild(t.name);
-	
+
 	var info_wrapper;
 	info_wrapper = document.createElement("div");
 	info_wrapper.className = "wgo-player-info";
 	t.box.appendChild(info_wrapper);
-	
+
 	t.info = {};
 	t.info.rank = prepare_dom_info("rank");
 	t.info.rank.val.innerHTML = "-";
@@ -41,26 +41,26 @@ var prepare_dom_info = function(type) {
 	var res = {};
 	res.wrapper = document.createElement("div");
 	res.wrapper.className = "wgo-player-info-box-wrapper";
-	
+
 	res.box = document.createElement("div");
 	res.box.className = "wgo-player-info-box";
 	res.wrapper.appendChild(res.box);
-	
+
 	res.title = document.createElement("div");
 	res.title.className = "wgo-player-info-title";
 	res.title.innerHTML = WGo.t(type);
 	res.box.appendChild(res.title);
-	
+
 	res.val = document.createElement("div");
 	res.val.className = "wgo-player-info-value";
 	res.box.appendChild(res.val);
-	
+
 	return res;
 }
 
 var kifu_loaded = function(e) {
 	var info = e.kifu.info || {};
-	
+
 	if(info.black) {
 		this.black.name.innerHTML = WGo.filterHTML(info.black.name) || WGo.t("black");
 		this.black.info.rank.val.innerHTML = WGo.filterHTML(info.black.rank) || "-";
@@ -77,10 +77,10 @@ var kifu_loaded = function(e) {
 		this.white.name.innerHTML = WGo.t("white");
 		this.white.info.rank.val.innerHTML = "-";
 	}
-	
+
 	this.black.info.caps.val.innerHTML = "0";
 	this.white.info.caps.val.innerHTML = "0";
-	
+
 	if(info.TM) {
 		this.setPlayerTime("black", info.TM);
 		this.setPlayerTime("white", info.TM);
@@ -89,13 +89,13 @@ var kifu_loaded = function(e) {
 		this.black.info.time.val.innerHTML = "--:--";
 		this.white.info.time.val.innerHTML = "--:--";
 	}
-	
+
 	this.updateDimensions();
 }
 
 var modify_font_size = function(elem) {
 	var css, max, size;
-	
+
 	if(elem.style.fontSize) {
 		var size = parseInt(elem.style.fontSize);
 		elem.style.fontSize = "";
@@ -103,11 +103,11 @@ var modify_font_size = function(elem) {
 		max = parseInt(css.fontSize);
 		elem.style.fontSize = size+"px";
 	}
-	else {	
+	else {
 		css = window.getComputedStyle(elem);
 		max = size = parseInt(css.fontSize);
 	}
-	
+
 	if(size == max && elem.scrollHeight <= elem.offsetHeight) return;
 	else if(elem.scrollHeight > elem.offsetHeight) {
 		size -= 2;
@@ -142,7 +142,7 @@ var update = function(e) {
 var InfoBox = WGo.extendClass(WGo.BasicPlayer.component.Component, function(player) {
 	this.super(player);
 	this.element.className = "wgo-infobox";
-	
+
 	prepare_dom.call(this);
 
 	player.addEventListener("kifuLoaded", kifu_loaded.bind(this));
@@ -168,7 +168,7 @@ bp_layouts["one_column"].top.push("InfoBox");
 bp_layouts["no_comment"].top.push("InfoBox");
 
 WGo.i18n.en["rank"] = "Rank";
-WGo.i18n.en["caps"] = "Caps";
+WGo.i18n.en["caps"] = "Captures";
 WGo.i18n.en["time"] = "Time";
 
 WGo.BasicPlayer.component.InfoBox = InfoBox;
