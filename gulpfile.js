@@ -29,6 +29,7 @@ gulp.task('themes-sass', function () {
 
 gulp.task('min-js', function () {
 	return gulp.src([
+		'wgo.js',
 		'kifu.js',
 		'sgfparser.js',
 		'player.js',
