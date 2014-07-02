@@ -42,10 +42,11 @@ gulp.task('min-js', function () {
 		'scoremode.js',
 		'player.permalink.js'
 	], { cwd: 'wgo/src' })
-		.pipe(uglify('wgo.min.js'))
+		.pipe(uglify('wgo.min.js', { outputSourceMap: true }))
 		.pipe(gulp.dest('wgo'));
 });
 
 gulp.task('watch', function () {
 	gulp.watch('themes/**/*.scss', ['themes-sass']);
+	gulp.watch('wgo/src/*.js', ['min-js']);
 });

@@ -473,6 +473,9 @@ button.wgo-button.wgo-selected:hover {
 .wgo-button-last::before {
   content: '\e81a'; }
 
+.wgo-button-menu {
+  display: none; }
+
 .wgo-button-menu::before {
   content: '\e81b';
   font-size: 18px;

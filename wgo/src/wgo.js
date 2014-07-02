@@ -1,4 +1,4 @@
-﻿/*!
+/*!
  * Copyright (c) 2013 Jan Prokop
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of this
@@ -238,8 +238,8 @@ Board.themes.default = {
 	stoneSize: function(board) {
 		return Math.min(board.fieldWidth, board.fieldHeight)/2;
 	},
-	coordinatesBackgroundColor: 'hsla(30, 40%, 40%, 1)',
-	coordinatesColor: 'hsla(30, 40%, 25%, 1)',
+	coordinatesBackgroundColor: 'hsla(30, 40%, 100%, 0.5)',
+	coordinatesColor: 'hsla(30, 40%, 25%, 0.5)',
 	font: "calibri",
 	linesShift: 0.25
 }
@@ -806,6 +806,7 @@ Board.coordinates = {
 			this.save();
 
 			// Add a drop shadow to the board
+			/*
 			this.beginPath();
 			this.rect(
 				board.fieldWidth,
@@ -818,6 +819,7 @@ Board.coordinates = {
 			this.shadowOffsetX = board.fieldWidth / 6;
 			this.shadowOffsetY = board.fieldHeight / 6;
 			this.fill();
+			*/
 
 			this.restore();
 			this.fillStyle = theme_variable("coordinatesColor", board);
