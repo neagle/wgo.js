@@ -405,6 +405,27 @@ Board.drawHandlers = {
 		shadow: shadow_handler,
 	},
 
+	FLAT: {
+		stone: {
+			draw: function (args, board) {
+				var xr = board.getX(args.x),
+					yr = board.getY(args.y),
+					sr = board.stoneRadius - 0.5,
+					lw = theme_variable('markupLinesWidth', board) || 1;
+
+				if (args.c == WGo.W) {
+					this.fillStyle = 'hsl(0, 0%, 95%)';
+				} else {
+					this.fillStyle = 'hsl(0, 0%, 20%)';
+				}
+
+				this.beginPath();
+				this.arc(xr, yr, Math.max(0, sr), 0, 2 * Math.PI, true);
+				this.fill();
+			}
+		}
+	},
+
 	PAINTED: {
 		stone: {
 			draw: function(args, board) {
