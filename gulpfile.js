@@ -47,5 +47,6 @@ gulp.task('min-js', function () {
 });
 
 gulp.task('watch', function () {
+	gulp.watch('wgo/src/*.js', ['min-js']);
 	gulp.watch('themes/**/*.scss', ['themes-sass']);
 });
