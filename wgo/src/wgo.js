@@ -1,4 +1,4 @@
-﻿/*!
+/*!
  * Copyright (c) 2013 Jan Prokop
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of this
@@ -238,8 +238,8 @@ Board.themes.default = {
 	stoneSize: function(board) {
 		return Math.min(board.fieldWidth, board.fieldHeight)/2;
 	},
-	coordinatesBackgroundColor: 'hsla(30, 40%, 40%, 1)',
-	coordinatesColor: 'hsla(30, 40%, 25%, 1)',
+	coordinatesBackgroundColor: 'hsla(30, 40%, 100%, 0.5)',
+	coordinatesColor: 'hsla(30, 40%, 25%, 0.5)',
 	font: "calibri",
 	linesShift: 0.25
 }
@@ -403,6 +403,27 @@ Board.drawHandlers = {
 		},
 		// adding shadow handler
 		shadow: shadow_handler,
+	},
+
+	FLAT: {
+		stone: {
+			draw: function (args, board) {
+				var xr = board.getX(args.x),
+					yr = board.getY(args.y),
+					sr = board.stoneRadius - 0.5,
+					lw = theme_variable('markupLinesWidth', board) || 1;
+
+				if (args.c == WGo.W) {
+					this.fillStyle = 'hsl(0, 0%, 95%)';
+				} else {
+					this.fillStyle = 'hsl(0, 0%, 20%)';
+				}
+
+				this.beginPath();
+				this.arc(xr, yr, Math.max(0, sr), 0, 2 * Math.PI, true);
+				this.fill();
+			}
+		}
 	},
 
 	PAINTED: {
@@ -806,6 +827,7 @@ Board.coordinates = {
 			this.save();
 
 			// Add a drop shadow to the board
+			/*
 			this.beginPath();
 			this.rect(
 				board.fieldWidth,
@@ -818,6 +840,7 @@ Board.coordinates = {
 			this.shadowOffsetX = board.fieldWidth / 6;
 			this.shadowOffsetY = board.fieldHeight / 6;
 			this.fill();
+			*/
 
 			this.restore();
 			this.fillStyle = theme_variable("coordinatesColor", board);

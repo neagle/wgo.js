@@ -6,34 +6,34 @@ var prepare_dom = function() {
 	this.box = document.createElement("div");
 	this.box.className = "wgo-box-wrapper wgo-comments-wrapper";
 	this.element.appendChild(this.box);
-	
+
 	this.comments_title = document.createElement("div");
 	this.comments_title.className = "wgo-box-title";
 	this.comments_title.innerHTML = WGo.t("comments");
 	this.box.appendChild(this.comments_title);
-	
+
 	this.comments = document.createElement("div");
 	this.comments.className = "wgo-comments-content";
 	this.box.appendChild(this.comments);
-	
+
 	this.help = document.createElement("div");
 	this.help.className = "wgo-help";
 	this.help.style.display = "none";
 	this.comments.appendChild(this.help);
-	
+
 	this.notification = document.createElement("div");
 	this.notification.className = "wgo-notification";
 	this.notification.style.display = "none";
 	this.comments.appendChild(this.notification);
-	
+
 	this.comment_text = document.createElement("div");
-	this.comment_text.className = "wgo-comment-text"; 
+	this.comment_text.className = "wgo-comment-text";
 	this.comments.appendChild(this.comment_text);
 }
 
 var mark = function(move) {
 	var x,y;
-	
+
 	x = move.charCodeAt(0)-'a'.charCodeAt(0);
 	if(x < 0) x += 'a'.charCodeAt(0)-'A'.charCodeAt(0);
 	if(x > 7) x--;
@@ -50,6 +50,20 @@ var unmark = function() {
 	delete this._tmp_mark;
 }
 
+// Show mark on board for coordinates wrapped in .wgo-move-link
+document.addEventListener('mouseover', function (event) {
+	if (~event.target.className.indexOf('wgo-move-link')) {
+		mark.call(player, event.target.innerHTML);
+	}
+});
+
+// Hide mark
+document.addEventListener('mouseout', function (event) {
+	if (~event.target.className.indexOf('wgo-move-link')) {
+		unmark.call(player);
+	}
+});
+
 var search_nodes = function(nodes, player) {
 	for(var i in nodes) {
 		if(nodes[i].className && nodes[i].className == "wgo-move-link") {
@@ -58,7 +72,7 @@ var search_nodes = function(nodes, player) {
 		}
 		else if(nodes[i].childNodes && nodes[i].childNodes.length) search_nodes(nodes[i].childNodes, player);
 	}
-}	
+}
 
 var format_info = function(info, title) {
 	var ret = '<div class="wgo-info-list">';
@@ -77,26 +91,26 @@ var format_info = function(info, title) {
 var CommentBox = WGo.extendClass(WGo.BasicPlayer.component.Component, function(player) {
 	this.super(player);
 	this.player = player;
-	
+
 	this.element.className = "wgo-commentbox";
-	
+
 	prepare_dom.call(this);
-	
+
 	player.addEventListener("kifuLoaded", function(e) {
 		if(e.kifu.hasComments()) {
 			this.comments_title.innerHTML = WGo.t("comments");
 			this.element.className = "wgo-commentbox";
-			
+
 			this._update = function(e) {
 				this.setComments(e);
 			}.bind(this);
-			
+
 			player.addEventListener("update", this._update);
 		}
 		else {
 			this.comments_title.innerHTML = WGo.t("gameinfo");
 			this.element.className = "wgo-commentbox wgo-gameinfo";
-			
+
 			if(this._update) {
 				player.removeEventListener("update", this._update);
 				delete this._update;
@@ -104,7 +118,7 @@ var CommentBox = WGo.extendClass(WGo.BasicPlayer.component.Component, function(p
 			this.comment_text.innerHTML = format_info(e.target.getGameInfo());
 		}
 	}.bind(this));
-	
+
 	player.notification = function(text) {
 		if(text) {
 			this.notification.style.display = "block";
@@ -115,12 +129,12 @@ var CommentBox = WGo.extendClass(WGo.BasicPlayer.component.Component, function(p
 			this.notification.style.display = "none";
 			this.is_notification = false;
 		}
-		
+
 		if(this.is_notification || this.is_help) this.comment_text.style.display = "none";
 		else this.comment_text.style.display = "block";
-		
+
 	}.bind(this);
-	
+
 	player.help = function(text) {
 		if(text) {
 			this.help.style.display = "block";
@@ -131,7 +145,7 @@ var CommentBox = WGo.extendClass(WGo.BasicPlayer.component.Component, function(p
 			this.help.style.display = "none";
 			this.is_help = false;
 		}
-		
+
 		if(this.is_notification || this.is_help) this.comment_text.style.display = "none";
 		else this.comment_text.style.display = "block";
 	}.bind(this);
@@ -144,7 +158,7 @@ CommentBox.prototype.setComments = function(e) {
 	if(!e.node.parent) {
 		msg = format_info(e.target.getGameInfo(), true);
 	}
-	
+
 	this.comment_text.innerHTML = msg+this.getCommentText(e.node.comment, this.player.config.formatNicks, this.player.config.formatMoves);
 
 	if(this.player.config.formatMoves) {
@@ -170,14 +184,14 @@ CommentBox.prototype.getCommentText = function(comment, formatNicks, formatMoves
  * - formatNicks: tries to highlight nicknames in comments (default: true)
  * - formatMoves: tries to highlight coordinates in comments (default: true)
  */
- 
+
 WGo.BasicPlayer.default.formatNicks = true;
 WGo.BasicPlayer.default.formatMoves = true;
 
 WGo.BasicPlayer.attributes["data-wgo-formatnicks"] = function(value) {
 	if(value.toLowerCase() == "false") this.formatNicks = false;
 }
-	
+
 WGo.BasicPlayer.attributes["data-wgo-formatmoves"] = function(value) {
 	if(value.toLowerCase() == "false") this.formatMoves = false;
 }
