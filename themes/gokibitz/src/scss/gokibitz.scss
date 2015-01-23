@@ -528,8 +528,10 @@ button.wgo-button {
 	color: $color-icon;
 	// TODO: Replace with something attractive!
 	outline: none;
-	width: 44px;
-	height: 44px;
+	width: 60px;
+	height: 60px;
+	/*width: 44px;*/
+	/*height: 44px;*/
 	/*margin: 0 3px;*/
 	transition: background-color 0.1s;
 	vertical-align: middle;
@@ -538,7 +540,7 @@ button.wgo-button {
 button.wgo-button:not([disabled]):hover,
 input[type="text"].wgo-player-mn-value:focus {
 	background-color: $button-background-active;
-	cursor: pointer;
+	/*cursor: pointer;*/
 	/*border: 1px solid rgba(100,100,100,0.3);*/
 	/*box-shadow: 0 0 20px 0 rgba(150,150,150,0.5);*/
 }
@@ -555,7 +557,8 @@ button.wgo-button.wgo-selected:hover {
 
 .wgo-button::before {
 	font-family: "wgo-icons";
-	font-size: 18px;
+	/*font-size: 18px;*/
+	font-size: 24px;
 	/*font-size: 36px;*/
 	display: inline-block;
 }
@@ -639,12 +642,13 @@ input[type="text"].wgo-player-mn-value  {
 	outline: 0;
 	text-align: center;
 	vertical-align: middle;
-	width: 2em;
+	width: 90%;
+	transition: all 0.2s;
 }
 
 .wgo-player-mn-wrapper {
 	display: inline-block;
-	width: 38px;
+	width: 50px;
 	text-align: center;
 }
 
@@ -665,10 +669,10 @@ input[type="text"].wgo-player-mn-value  {
 	display: none;
 }
 
+/*.wgo-340 .wgo-button-first,*/
+/*.wgo-340 .wgo-button-last,*/
 .wgo-340 .wgo-button-multiprev,
-.wgo-340 .wgo-button-multinext,
-.wgo-340 .wgo-button-first,
-.wgo-340 .wgo-button-last {
+.wgo-340 .wgo-button-multinext {
 	display: none;
 }
 
@@ -709,8 +713,10 @@ input[type="text"].wgo-player-mn-value  {
 	transition: background-color 0.2s;
 }
 
-.wgo-menu-item:not(.wgo-disabled):hover {
-	background-color: hsla(0, 0%, 100%, 1);
+.wgo-menu-item:not(.wgo-disabled) {
+	&:hover, &:focus {
+		background-color: hsla(0, 0%, 100%, 1);
+	}
 }
 
 .wgo-menu-item::before {
