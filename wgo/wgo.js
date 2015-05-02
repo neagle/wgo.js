@@ -1070,16 +1070,17 @@ var drawField = function(x,y) {
 }
 
 var getMousePos = function(e) {
-	// new hopefully better translation of coordinates
-
+	var rect = this.layers[0].element.getBoundingClientRect();
 	var x, y;
 
-	x = e.layerX * this.pixelRatio;
+	x = e.clientX - rect.left;
+	x *= this.pixelRatio;
 	x -= this.left;
 	x /= this.fieldWidth;
 	x = Math.round(x);
 
-	y = e.layerY * this.pixelRatio;
+	y = e.clientY - rect.top;
+	y *= this.pixelRatio;
 	y -= this.top;
 	y /= this.fieldHeight;
 	y = Math.round(y);
